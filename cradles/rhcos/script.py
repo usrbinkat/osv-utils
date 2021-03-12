@@ -39,7 +39,6 @@ group = parser.add_mutually_exclusive_group(
     required=True)
 group.add_argument(
     "--image-url",
-    default="http://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-openstack.x86_64.qcow2.gz",
     metavar="https://FQDN/URI/image.qcow2.gz",
     help="qcow image url")
 group.add_argument(
