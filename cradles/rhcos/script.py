@@ -31,7 +31,7 @@ parser.add_argument(
 parser.add_argument(
     "--build-path",
     default=(os.getcwd()),
-    help="Run directory for script, must be an absolute path, only handy if running script in a container",
+    help="Container build context global path",
     required=False)
 
 
