@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 import os
 import sys
 import gzip
@@ -7,10 +8,6 @@ import tempfile
 import argparse
 import subprocess
 import urllib.request
-#from io import StringIO
-#from io import BytesIO
-#from pathlib import Path
-#from tempfile import NamedTemporaryFile
 
 
 # Define Mandatory & Optional CLI Flags
