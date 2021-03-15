@@ -4,10 +4,13 @@
 import os
 import sys
 import gzip
+import shutil
+import pathlib
 import tempfile
 import argparse
 import subprocess
 import urllib.request
+from datetime import datetime
 
 
 # Define Mandatory & Optional CLI Flags
@@ -18,7 +21,7 @@ parser.add_argument(
     default="localhost/cradle",
     help="Name of cradle image",
     metavar="registry.com/namespace/image-name",
-    required=True)
+    required=False)
 parser.add_argument(
     "--image-tag",
     default="latest",
@@ -27,7 +30,7 @@ parser.add_argument(
     required=False)
 parser.add_argument(
     "--build-path",
-    default=(os.getcwd()),
+    default=("/tmp/cradle"),
     help="Container build context global path",
     required=False)
 
@@ -53,28 +56,46 @@ args                     = parser.parse_args()
 
 
 # Base Variables
-cradle_tag               = args.image_tag
+rundate                  = datetime.now()
+datetimestr              = rundate.strftime("%Y%m%d%H%M%S")
 cradle_name              = args.image_name
+cradle_tag               = args.image_tag
 build_path               = args.build_path
-container_build_cmd      = "podman build --storage-driver='overlay' --isolation='chroot'"
-qcow2_image_staging_path = ( build_path + "/rootfs/disk/image.qcow2" )
+container_context        = (args.build_path + "/" + datetimestr)
+qcow2_staging_path       = (container_context + "/rootfs/disk/image.qcow2")
 docker_file              = ("FROM scratch" + "\n" + "ADD " + "./rootfs /")
+container_build_cmd      = "podman build --storage-driver='overlay' --isolation='chroot'"
+
+
+# Create temp cradle build directory tree
+def StageBuildTree(args, container_context):
+    try:
+        os.makedirs(container_context + "/rootfs/disk", exist_ok=True)
+    except OSError:
+        print ("Failed to create container context directory: %container_context " % container_context)
+    else:
+        print( ">> Created Build Context: " + container_context )
+    f = open(container_context + '/Dockerfile', 'w')
+    f.write(docker_file)
+    f.close()
 
 
 # Stage Qcow2 Image File
-def StageImageFile(args, build_path):
-    print( ">> Staging Image: " + args.image_file )
+def StageImageFile(args, container_context):
+    print( ">> Staging Image File: " + args.image_file )
+    shutil.copy(args.image_file, qcow2_staging_path)
+
 
 
 # Download Image from URL
-def DownloadImageFile(args, build_path):
+def DownloadImageFile(args, qcow2_staging_path):
     download_url = (args.image_url)
     print( ">> Downloading Image: " + args.image_url )
     try:
         with urllib.request.urlopen(download_url) as image_gzip:
             with gzip.GzipFile(fileobj=image_gzip) as archive:
                 archive_content = archive.read()
-            with open(qcow2_image_staging_path, 'wb') as image:
+            with open(qcow2_staging_path, 'wb') as image:
                 image.write(archive_content)
                 return 0
     except Exception as e:
@@ -83,25 +104,25 @@ def DownloadImageFile(args, build_path):
 
 
 # Build Disk Image Cradle Container
-def PodmanBuildCradle(container_build_cmd, cradle_name, cradle_tag, build_path, docker_file):
-    f = open(build_path + '/Dockerfile', 'w')
-    f.write(docker_file)
-    f.close()
-    subprocess.run(
-        container_build_cmd + " -t " + cradle_name + ":" + cradle_tag + " " + build_path,
+def PodmanBuildCradle(container_build_cmd, cradle_name, cradle_tag, container_context):
+    dockerfile = (container_context + "/Dockerfile")
+    build_cmd  = (container_build_cmd + " -f " + dockerfile + " -t " + cradle_name + ":" + cradle_tag + " " + container_context)
+    os.chdir(container_context)
+    print(">> Executing build: \n>>     " + build_cmd)
+    subprocess.run( build_cmd,
         env=dict(os.environ, STORAGE_DRIVER="overlay"),
-        shell=True, check=True
+        shell=True, check=True, cwd=container_context
     )
 
 
 def main():
     print( ">> Automated KubeVirt Qcow2 Image Cradle Container Builder" )
-    print( ">> Building Cradle from directory: " + build_path )
+    StageBuildTree(args, container_context)
     if args.image_url != "":
-      DownloadImageFile(args, build_path)
+      DownloadImageFile(args, qcow2_staging_path)
     if args.image_file != "":
-      StageImageFile(args, build_path)
-    PodmanBuildCradle(container_build_cmd, cradle_name, cradle_tag, build_path, docker_file)
+      StageImageFile(args, qcow2_staging_path)
+    PodmanBuildCradle(container_build_cmd, cradle_name, cradle_tag, container_context)
 
 
 if __name__ == "__main__":

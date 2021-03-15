@@ -1,2 +1,5 @@
 *.gz
 *.qcow2
+*.swp*
+rootfs
+.*.swp*
