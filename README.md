@@ -3,12 +3,20 @@ Quick Starts for OpenShift Virtualization (Red Hat OpenShift Opinionated KubeVir
 
 ### Example build from local source
 ```sh
-./cradle --image-file ${localImagePath} --image-name 'localhost/rhcos-openstack' --image-tag '4.7'
+./cradle \
+  --image-tag='4.7'
+  --image-name='localhost/rhcos-openstack' \
+  --image-url="${localImagePath}" \
+  --cradle-image='scratch' \
 ```
 
 ### Example build from remote source
 ```sh
-./cradle --image-url ${remoteImageUrl} --image-name 'localhost/rhcos-openstack' --image-tag '4.7'
+./cradle \
+  --image-tag='4.7'
+  --image-name='localhost/rhcos-openstack' \
+  --image-url="${remoteImageUrl}" \
+  --cradle-image='scratch' \
 ```
 
 ### Example Variables:
@@ -27,6 +35,7 @@ KubeVirt Image Cradle Builder to generate OpenShift Virtualization compatible qc
 
 optional arguments:
   -h, --help                                      show this help message
+  --image-name registry.com/namespace/image-name  Name of cradle image
   --image-name registry.com/namespace/image-name  Name of cradle image
   --image-tag IMAGE_TAG                           Image tag
   --build-path BUILD_PATH                         Container build context global path
