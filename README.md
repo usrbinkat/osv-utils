@@ -3,12 +3,12 @@ Quick Starts for OpenShift Virtualization (Red Hat OpenShift Opinionated KubeVir
 
 ### Example build from local source
 ```sh
-./cradle --image-file ${imagePath} --image-name 'localhost/rhcos-openstack' --image-tag '4.7'
+./cradle --image-file ${localImagePath} --image-name 'localhost/rhcos-openstack' --image-tag '4.7'
 ```
 
 ### Example build from remote source
 ```sh
-./cradle --image-url ${imageUrl} --image-name 'localhost/rhcos-openstack' --image-tag '4.7'
+./cradle --image-url ${remoteImageUrl} --image-name 'localhost/rhcos-openstack' --image-tag '4.7'
 ```
 
 ### Example Variables:
