@@ -8,7 +8,6 @@ import tempfile
 import argparse
 import subprocess
 import urllib.request
-from jinja2 import Template
 
 
 # Define Mandatory & Optional CLI Flags
@@ -57,15 +56,15 @@ args                     = parser.parse_args()
 cradle_tag               = args.image_tag
 cradle_name              = args.image_name
 build_path               = args.build_path
-container_build_cmd      = "podman build"
+container_build_cmd      = "podman build --storage-driver='overlay' --isolation='chroot'"
 qcow2_image_staging_path = ( build_path + "/rootfs/disk/image.qcow2" )
-docker_file              = ("FROM scratch"
-                            "ADD " + build_path + "/rootfs /")
+docker_file              = ("FROM scratch" + "\n" + "ADD " + "./rootfs /")
 
 
 # Stage Qcow2 Image File
 def StageImageFile(args, build_path):
     print( ">> Staging Image: " + args.image_file )
+
 
 # Download Image from URL
 def DownloadImageFile(args, build_path):
@@ -84,9 +83,13 @@ def DownloadImageFile(args, build_path):
 
 
 # Build Disk Image Cradle Container
-def PodmanBuildCradle(container_build_cmd, cradle_name, cradle_tag, build_path):
+def PodmanBuildCradle(container_build_cmd, cradle_name, cradle_tag, build_path, docker_file):
+    f = open(build_path + '/Dockerfile', 'w')
+    f.write(docker_file)
+    f.close()
     subprocess.run(
         container_build_cmd + " -t " + cradle_name + ":" + cradle_tag + " " + build_path,
+        env=dict(os.environ, STORAGE_DRIVER="overlay"),
         shell=True, check=True
     )
 
@@ -98,7 +101,7 @@ def main():
       DownloadImageFile(args, build_path)
     if args.image_file != "":
       StageImageFile(args, build_path)
-    PodmanBuildCradle(container_build_cmd, cradle_name, cradle_tag, build_path)
+    PodmanBuildCradle(container_build_cmd, cradle_name, cradle_tag, build_path, docker_file)
 
 
 if __name__ == "__main__":

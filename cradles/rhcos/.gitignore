@@ -1,1 +1,2 @@
-rootfs/disk/rhcos.qcow2
+./rootfs/disk/*.qcow2
+*.qcow2
