@@ -33,6 +33,11 @@ parser.add_argument(
     default=("/tmp/cradle"),
     help="Container build context global path",
     required=False)
+parser.add_argument(
+    "--cradle-image",
+    help="Name of cradle image",
+    default="registry.access.redhat.com/ubi8/ubi",
+    required=False)
 
 
 group = parser.add_mutually_exclusive_group(
@@ -63,7 +68,7 @@ cradle_tag               = args.image_tag
 build_path               = args.build_path
 container_context        = (args.build_path + "/" + datetimestr)
 qcow2_staging_path       = (container_context + "/rootfs/disk/image.qcow2")
-docker_file              = ("FROM scratch" + "\n" + "ADD " + "./rootfs /")
+docker_file              = ("FROM " + args.cradle_image + "\n" + "ADD " + "./rootfs /")
 container_build_cmd      = "podman build --storage-driver='overlay' --isolation='chroot'"
 
 
