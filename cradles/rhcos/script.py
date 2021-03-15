@@ -59,6 +59,8 @@ cradle_name              = args.image_name
 build_path               = args.build_path
 container_build_cmd      = "podman build"
 qcow2_image_staging_path = ( build_path + "/rootfs/disk/image.qcow2" )
+docker_file              = ("FROM scratch"
+                            "ADD " + build_path + "/rootfs /")
 
 
 # Stage Qcow2 Image File
