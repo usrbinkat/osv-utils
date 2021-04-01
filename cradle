@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# ./cradle --image-name registry.com/namespace/rhel --image-tag 8.2 --cradle-image scratch --image-file ./images/rhel-8.2.x86_64.qcow2
 
 import os
 import sys

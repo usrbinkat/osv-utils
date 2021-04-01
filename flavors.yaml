@@ -101,7 +101,15 @@ objects:
           kubevirt.io/size: large
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 2
             cores: 1
             threads: 1
@@ -109,6 +117,9 @@ objects:
             requests:
               memory: 8Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             inputs:
@@ -213,6 +224,7 @@ objects:
   metadata:
     name: ${NAME}
     labels:
+      debugLogs: true
       vm.kubevirt.io/template: rhel7-desktop-medium
       vm.kubevirt.io/template.version: "v0.13.2"
       vm.kubevirt.io/template.revision: "1"
@@ -256,7 +268,15 @@ objects:
           kubevirt.io/size: medium
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -264,6 +284,9 @@ objects:
             requests:
               memory: 4Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             inputs:
@@ -411,7 +434,15 @@ objects:
           kubevirt.io/size: small
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -419,6 +450,9 @@ objects:
             requests:
               memory: 2Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             inputs:
@@ -566,7 +600,15 @@ objects:
           kubevirt.io/size: tiny
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -574,6 +616,9 @@ objects:
             requests:
               memory: 1Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             inputs:
@@ -721,8 +766,16 @@ objects:
           kubevirt.io/size: large
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           ioThreadsPolicy: shared
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 2
             cores: 1
             threads: 1
@@ -730,6 +783,9 @@ objects:
             requests:
               memory: 8Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -873,8 +929,19 @@ objects:
           kubevirt.io/size: medium
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           ioThreadsPolicy: shared
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -882,6 +949,9 @@ objects:
             requests:
               memory: 4Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -1025,8 +1095,16 @@ objects:
           kubevirt.io/size: small
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           ioThreadsPolicy: shared
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -1034,6 +1112,9 @@ objects:
             requests:
               memory: 2Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -1177,8 +1258,16 @@ objects:
           kubevirt.io/size: tiny
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           ioThreadsPolicy: shared
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -1186,6 +1275,9 @@ objects:
             requests:
               memory: 1Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -1329,7 +1421,15 @@ objects:
           kubevirt.io/size: large
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 2
             cores: 1
             threads: 1
@@ -1337,6 +1437,9 @@ objects:
             requests:
               memory: 8Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -1480,7 +1583,15 @@ objects:
           kubevirt.io/size: medium
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -1488,6 +1599,9 @@ objects:
             requests:
               memory: 4Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -1632,7 +1746,15 @@ objects:
           kubevirt.io/size: small
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -1640,6 +1762,9 @@ objects:
             requests:
               memory: 2Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -1783,7 +1908,15 @@ objects:
           kubevirt.io/size: tiny
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -1791,6 +1924,9 @@ objects:
             requests:
               memory: 1Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -1922,7 +2058,15 @@ objects:
           kubevirt.io/size: large
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 2
             cores: 1
             threads: 1
@@ -1930,6 +2074,9 @@ objects:
             requests:
               memory: 8Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             inputs:
@@ -2065,7 +2212,15 @@ objects:
           kubevirt.io/size: medium
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -2073,6 +2228,9 @@ objects:
             requests:
               memory: 4Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             inputs:
@@ -2208,7 +2366,15 @@ objects:
           kubevirt.io/size: small
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -2216,6 +2382,9 @@ objects:
             requests:
               memory: 2Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             inputs:
@@ -2351,7 +2520,15 @@ objects:
           kubevirt.io/size: tiny
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -2359,6 +2536,9 @@ objects:
             requests:
               memory: 1.5Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             inputs:
@@ -2494,8 +2674,16 @@ objects:
           kubevirt.io/size: large
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           ioThreadsPolicy: shared
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 2
             cores: 1
             threads: 1
@@ -2503,6 +2691,9 @@ objects:
             requests:
               memory: 8Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -2634,8 +2825,16 @@ objects:
           kubevirt.io/size: medium
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           ioThreadsPolicy: shared
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -2643,6 +2842,9 @@ objects:
             requests:
               memory: 4Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -2774,8 +2976,16 @@ objects:
           kubevirt.io/size: small
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           ioThreadsPolicy: shared
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -2783,6 +2993,9 @@ objects:
             requests:
               memory: 2Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -2914,8 +3127,16 @@ objects:
           kubevirt.io/size: tiny
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           ioThreadsPolicy: shared
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -2923,6 +3144,9 @@ objects:
             requests:
               memory: 1.5Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -3054,7 +3278,15 @@ objects:
           kubevirt.io/size: large
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 2
             cores: 1
             threads: 1
@@ -3062,6 +3294,9 @@ objects:
             requests:
               memory: 8Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -3193,7 +3428,15 @@ objects:
           kubevirt.io/size: medium
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -3201,6 +3444,9 @@ objects:
             requests:
               memory: 4Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -3333,7 +3579,15 @@ objects:
           kubevirt.io/size: small
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -3341,6 +3595,9 @@ objects:
             requests:
               memory: 2Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
@@ -3472,7 +3729,15 @@ objects:
           kubevirt.io/size: tiny
       spec:
         domain:
+          features:
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                secureBoot: true
           cpu:
+            dedicatedCpuPlacement: false
             sockets: 1
             cores: 1
             threads: 1
@@ -3480,6 +3745,9 @@ objects:
             requests:
               memory: 1.5Gi
           devices:
+            autoattachPodInterface: true
+            autoattachSerialConsole: false
+            autottachGraphicsDevice: false
             rng: {}
             networkInterfaceMultiqueue: true
             disks:
